@@ -1,0 +1,6 @@
+[submodule "node-jshint"]
+	path = node-jshint
+	url = git://github.com/jshint/node-jshint.git
+[submodule "node-argsparser"]
+	path = node-argsparser
+	url = git://github.com/kof/node-argsparser.git
