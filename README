@@ -1,0 +1,6 @@
+node-jshint-windows 0.2.3
+
+Copyright (c) 2011 Artur Dorochowicz
+
+Packaging of node command line interface for JSHint with Windows version of node.js.
+Ready to use on Windows (and Windows alone).

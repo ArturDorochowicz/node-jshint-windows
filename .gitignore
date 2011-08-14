@@ -1,2 +1,2 @@
-build
-node.exe
+/build
+/lib/runtime/node/node.exe

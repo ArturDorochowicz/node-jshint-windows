@@ -1,6 +1,6 @@
-[submodule "node-jshint"]
-	path = node-jshint
+[submodule "lib/runtime/node-jshint"]
+	path = lib/runtime/node-jshint
 	url = git://github.com/jshint/node-jshint.git
-[submodule "node-argsparser"]
-	path = node-argsparser
+[submodule "lib/runtime/node-argsparser"]
+	path = lib/runtime/node-argsparser
 	url = git://github.com/kof/node-argsparser.git

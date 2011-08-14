@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>node-jshint-windows</id>
+    <version>0.2.3</version>
+    <authors>Artur Dorochowicz</authors>
+    <owners>Artur Dorochowicz</owners>
+    <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
+    <projectUrl>https://github.com/ArturDorochowicz/node-jshint-windows</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Packaging of node command line interface for JSHint with Windows version of node.js.</description>
+    <tags>jshint jslint lint node javascript</tags>
+  </metadata>
+</package>
