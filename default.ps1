@@ -55,6 +55,7 @@ task download-node {
 	} else {
 		Import-Module BitsTransfer
 		try {
+			New-Item -ItemType container -Path (Split-Path -Parent -Path $node)
 			Start-BitsTransfer -DisplayName "Downloading node from ${node.url}" -Source ${node.url} -Destination $node
 		} finally {
 			Remove-Module BitsTransfer
