@@ -34,17 +34,18 @@ task build-cli -depends clean-build-dir, prepare-build-dir, git-submodules-updat
 	New-Item -ItemType container -Path "${build.dir}/cli"
 
 	Copy-Item -Path "${src.dir}/main/*" -Destination "${build.dir}/cli"	
+	Copy-Item -Include 'changelog.txt', 'license.txt', 'readme.txt' -Path "${sln.dir}/*" -Destination "${build.dir}/cli"
 	Copy-Item -Path $node -Destination "${build.dir}/cli"
 	
 	New-Item -ItemType container -Path "${build.dir}/cli/node_modules"
 	
 	New-Item -ItemType container -Path "${build.dir}/cli/node_modules/argsparser"
-	Copy-Item -Include @('index.js', 'package.json') -Path "${lib.runtime.dir}/node-argsparser/*" -Destination "${build.dir}/cli/node_modules/argsparser/"
+	Copy-Item -Include 'index.js', 'package.json' -Path "${lib.runtime.dir}/node-argsparser/*" -Destination "${build.dir}/cli/node_modules/argsparser/"
 	New-Item -ItemType container -Path "${build.dir}/cli/node_modules/argsparser/lib"
 	Copy-Item -Path "${lib.runtime.dir}/node-argsparser/lib/argsparser.js" -Destination "${build.dir}/cli/node_modules/argsparser/lib/"
 
 	New-Item -ItemType container -Path "${build.dir}/cli/node_modules/jshint"
-	Copy-Item -Recurse -Include @('lib', 'HELP', 'LICENSE', 'package.json') -Path "${lib.runtime.dir}/node-jshint/*" -Destination "${build.dir}/cli/node_modules/jshint/"
+	Copy-Item -Recurse -Include 'lib', 'HELP', 'LICENSE', 'package.json' -Path "${lib.runtime.dir}/node-jshint/*" -Destination "${build.dir}/cli/node_modules/jshint/"
 	New-Item -ItemType container -Path "${build.dir}/cli/node_modules/jshint/packages/jshint"
 	Copy-Item -Path "${lib.runtime.dir}/node-jshint/packages/jshint/jshint.js" -Destination "${build.dir}/cli/node_modules/jshint/packages/jshint/"
 }
@@ -66,7 +67,8 @@ task download-node {
 task nuget-package-layout -depends build-cli {
 	New-Item -ItemType container -Path "${build.dir}/nuget-package-layout"
 	New-Item -ItemType container -Path "${build.dir}/nuget-package-layout/tools"
-	Copy-Item -Recurse -Path "${build.dir}/cli/*" -Destination "${build.dir}/nuget-package-layout/tools"
+	Copy-Item -Recurse -Exclude 'changelog.txt', 'license.txt', 'readme.txt' -Path "${build.dir}/cli/*" -Destination "${build.dir}/nuget-package-layout/tools"
+	Copy-Item -Include 'changelog.txt', 'license.txt', 'readme.txt' -Path "${build.dir}/cli/*" -Destination "${build.dir}/nuget-package-layout"
 	Copy-Item -Path "${src.dir}/nuget-package/node-jshint-windows.nuspec" -Destination "${build.dir}/nuget-package-layout"
 }
 
