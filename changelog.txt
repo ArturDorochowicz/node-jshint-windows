@@ -1,4 +1,7 @@
 
+vNext
+ - PowerShell module that encapsulates jshint.bat
+
 0.2.3.2 
  - fix missing files from jshint (HELP, LICENSE)
  - fix problem when running with current directory different than the one with node.exe
