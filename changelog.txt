@@ -1,4 +1,9 @@
 
+0.2.3.2 
+ - fix missing files from jshint (HELP, LICENSE)
+ - fix problem when running with current directory different than the one with node.exe
+ - readme update
+
 0.2.3.1
  - node.js 0.5.4
 

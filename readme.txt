@@ -1,6 +1,14 @@
-node-jshint-windows 0.2.3.1
+node-jshint-windows 0.2.3.2
 
 Copyright (c) 2011 Artur Dorochowicz
 
 Packaging of node command line interface for JSHint with Windows version of node.js.
 Ready to use on Windows (and Windows alone).
+
+
+Usage: jshint path path2 [options]
+Options:
+   --version            display package version
+   --config             custom config file
+   --reporter           custom reporter
+   --jslint-reporter    use a jslint compatible xml reporter
