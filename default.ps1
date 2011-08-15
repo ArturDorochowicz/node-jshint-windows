@@ -11,11 +11,17 @@ properties {
 
 task default -depends nuget-package
 
-task clean -depends clean-build-dir
+task clean -depends clean-build-dir, clean-node
 
 task clean-build-dir {
 	if (Test-Path -Path ${build.dir}) {
 		Remove-Item -Recurse -Force -Path ${build.dir}
+	}
+}
+
+task clean-node {
+	if (Test-Path -Path ${node}) {
+		Remove-Item -Force -Path ${node}
 	}
 }
 
@@ -54,13 +60,13 @@ task download-node {
 	if (Test-Path -Path $node) {
 		"Skipping node download. Node already exists at: ${node}"
 	} else {
+		Remove-Module BitsTransfer -ErrorAction SilentlyContinue
 		Import-Module BitsTransfer
-		try {
-			New-Item -ItemType container -Path (Split-Path -Parent -Path $node)
-			Start-BitsTransfer -DisplayName "Downloading node from ${node.url}" -Source ${node.url} -Destination $node
-		} finally {
-			Remove-Module BitsTransfer
+		${node.dir} = Split-Path -Parent -Path $node
+		if (!(Test-Path ${node.dir})) {
+			New-Item -ItemType container -Path ${node.dir}
 		}
+		Start-BitsTransfer -DisplayName "Downloading node from ${node.url}" -Source ${node.url} -Destination $node
 	}
 }
 
@@ -74,5 +80,5 @@ task nuget-package-layout -depends build-cli {
 task nuget-package -depends nuget-package-layout {
 	New-Item -ItemType container -Path "${build.dir}/nuget-package"
 	
-	exec { & "${lib.build.dir}/NuGet/nuget.exe" pack "${src.dir}/nuget-package/node-jshint-windows.nuspec" -BasePath "${build.dir}/nuget-package-layout" -OutputDirectory "${build.dir}/nuget-package" }
+	exec { & "${lib.build.dir}/NuGet/nuget.exe" pack "${src.dir}/nuget-package/package.nuspec" -BasePath "${build.dir}/nuget-package-layout" -OutputDirectory "${build.dir}/nuget-package" }
 }
