@@ -69,11 +69,10 @@ task nuget-package-layout -depends build-cli {
 	New-Item -ItemType container -Path "${build.dir}/nuget-package-layout/tools"
 	Copy-Item -Recurse -Exclude 'changelog.txt', 'license.txt', 'readme.txt' -Path "${build.dir}/cli/*" -Destination "${build.dir}/nuget-package-layout/tools"
 	Copy-Item -Include 'changelog.txt', 'license.txt', 'readme.txt' -Path "${build.dir}/cli/*" -Destination "${build.dir}/nuget-package-layout"
-	Copy-Item -Path "${src.dir}/nuget-package/node-jshint-windows.nuspec" -Destination "${build.dir}/nuget-package-layout"
 }
 
 task nuget-package -depends nuget-package-layout {
 	New-Item -ItemType container -Path "${build.dir}/nuget-package"
 	
-	exec { & "${lib.build.dir}/NuGet/nuget.exe" pack "${build.dir}/nuget-package-layout/node-jshint-windows.nuspec" -OutputDirectory "${build.dir}/nuget-package" }
+	exec { & "${lib.build.dir}/NuGet/nuget.exe" pack "${src.dir}/nuget-package/node-jshint-windows.nuspec" -BasePath "${build.dir}/nuget-package-layout" -OutputDirectory "${build.dir}/nuget-package" }
 }

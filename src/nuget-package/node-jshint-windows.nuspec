@@ -11,4 +11,7 @@
 		<description>Packaging of node command line interface for JSHint with Windows version of node.js.</description>
 		<tags>jshint jslint lint node javascript</tags>
 	</metadata>
+	<files>
+		<file src="**\*" />
+	</files>
 </package>
