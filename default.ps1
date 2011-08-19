@@ -39,21 +39,21 @@ task git-submodules-update {
 task build-cli -depends clean-build-dir, prepare-build-dir, git-submodules-update, download-node {
 	New-Item -ItemType container -Path "${build.dir}/cli"
 
-	Copy-Item -Path "${src.dir}/main/*" -Destination "${build.dir}/cli"	
+	Copy-Item -Recurse -Path "${src.dir}/main/*" -Destination "${build.dir}/cli"
 	Copy-Item -Include 'changelog.txt', 'license.txt', 'readme.txt' -Path "${sln.dir}/*" -Destination "${build.dir}/cli"
-	Copy-Item -Path $node -Destination "${build.dir}/cli"
+	Copy-Item -Path $node -Destination "${build.dir}/cli/lib"
 	
-	New-Item -ItemType container -Path "${build.dir}/cli/node_modules"
+	New-Item -ItemType container -Path "${build.dir}/cli/lib/node_modules"
 	
-	New-Item -ItemType container -Path "${build.dir}/cli/node_modules/argsparser"
-	Copy-Item -Include 'index.js', 'package.json' -Path "${lib.runtime.dir}/node-argsparser/*" -Destination "${build.dir}/cli/node_modules/argsparser/"
-	New-Item -ItemType container -Path "${build.dir}/cli/node_modules/argsparser/lib"
-	Copy-Item -Path "${lib.runtime.dir}/node-argsparser/lib/argsparser.js" -Destination "${build.dir}/cli/node_modules/argsparser/lib/"
+	New-Item -ItemType container -Path "${build.dir}/cli/lib/node_modules/argsparser"
+	Copy-Item -Include 'index.js', 'package.json' -Path "${lib.runtime.dir}/node-argsparser/*" -Destination "${build.dir}/cli/lib/node_modules/argsparser/"
+	New-Item -ItemType container -Path "${build.dir}/cli/lib/node_modules/argsparser/lib"
+	Copy-Item -Path "${lib.runtime.dir}/node-argsparser/lib/argsparser.js" -Destination "${build.dir}/cli/lib/node_modules/argsparser/lib/"
 
-	New-Item -ItemType container -Path "${build.dir}/cli/node_modules/jshint"
-	Copy-Item -Recurse -Include 'lib', 'HELP', 'LICENSE', 'package.json' -Path "${lib.runtime.dir}/node-jshint/*" -Destination "${build.dir}/cli/node_modules/jshint/"
-	New-Item -ItemType container -Path "${build.dir}/cli/node_modules/jshint/packages/jshint"
-	Copy-Item -Path "${lib.runtime.dir}/node-jshint/packages/jshint/jshint.js" -Destination "${build.dir}/cli/node_modules/jshint/packages/jshint/"
+	New-Item -ItemType container -Path "${build.dir}/cli/lib/node_modules/jshint"
+	Copy-Item -Recurse -Include 'lib', 'HELP', 'LICENSE', 'package.json' -Path "${lib.runtime.dir}/node-jshint/*" -Destination "${build.dir}/cli/lib/node_modules/jshint/"
+	New-Item -ItemType container -Path "${build.dir}/cli/lib/node_modules/jshint/packages/jshint"
+	Copy-Item -Path "${lib.runtime.dir}/node-jshint/packages/jshint/jshint.js" -Destination "${build.dir}/cli/lib/node_modules/jshint/packages/jshint/"
 }
 
 task download-node {
@@ -81,4 +81,25 @@ task nuget-package -depends nuget-package-layout {
 	New-Item -ItemType container -Path "${build.dir}/nuget-package"
 	
 	exec { & "${lib.build.dir}/NuGet/nuget.exe" pack "${src.dir}/nuget-package/package.nuspec" -BasePath "${build.dir}/nuget-package-layout" -OutputDirectory "${build.dir}/nuget-package" }
+}
+
+task test -depends build-cli, test-uses-vs-reporter-by-default, test-writes-report-file
+
+task test-uses-vs-reporter-by-default {
+	Remove-Module jshint -ErrorAction SilentlyContinue
+	Import-Module "${build.dir}/cli/jshint.psm1"
+	$actual = Invoke-JSHint -PathList "${src.dir}/test/broken.js"
+	$expected = "./src/test/broken.js(1,14): warning JSHint: Unmatched '{'."
+	Assert ($actual -eq $expected) "Expected: '$expected'`n`tbut got:  '$actual'"
+}
+
+task test-writes-report-file {	
+	Remove-Module jshint -ErrorAction SilentlyContinue
+	Import-Module "${build.dir}/cli/jshint.psm1"
+	${report.file} = "${build.dir}/report.txt"
+	Invoke-JSHint -PathList "${src.dir}/test/broken.js" -ReportFile ${report.file}
+	$actual = Get-Content -Path ${report.file}
+	Remove-Item -Path ${report.file} -ErrorAction SilentlyContinue
+	$expected = "./src/test/broken.js(1,14): warning JSHint: Unmatched '{'."
+	Assert ($actual -eq $expected) "Expected: '$expected'`n`tbut got:  '$actual'"	
 }

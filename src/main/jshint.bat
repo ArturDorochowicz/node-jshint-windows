@@ -1,1 +1,1 @@
-@"%~dp0node.exe" "%~dp0hint.js" %*
+@"%~dp0lib/node.exe" "%~dp0lib/hint.js" %*
