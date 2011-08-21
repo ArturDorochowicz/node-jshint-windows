@@ -4,6 +4,7 @@ This is a packaging of Open Source components. The added work that makes that
 package possible is released under the following slightly modified MIT license.
 (Unless someone proves me wrong, I assume I'm required to use the same license as JSLint.)
 
+
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the "Software"),
 to deal in the Software without restriction, including without limitation
@@ -23,10 +24,21 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
+
   
   
 
-The licenses governing the included components are enclosed below for reference.
+The licenses or references to the licenses governing the included components are enclosed below.
+
+
+node-jshint
+
+  MIT License - http://www.opensource.org/licenses/mit-license.php
+
+
+node-argsparser
+
+  MIT License - http://www.opensource.org/licenses/mit-license.php
 
 
 JSHint 
@@ -140,13 +152,3 @@ node.js
     http://sourceware.org/pthreads-win32/ It is Copyright 1998 John E.
     Bossom and 1999,2006 Pthreads-win32 contributors and licensed under the
     LGPL. See deps/pthread-win32/COPYING.LIB for more details.
-
-
-node-jshint
-
-  MIT License - http://www.opensource.org/licenses/mit-license.php
-
-
-node-argsparser 0.0.6 
-
-  MIT License - http://www.opensource.org/licenses/mit-license.php
