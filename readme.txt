@@ -1,4 +1,4 @@
-node-jshint-windows 0.2.3.2
+node-jshint-windows
 
 Copyright (c) 2011 Artur Dorochowicz
 

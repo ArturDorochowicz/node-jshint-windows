@@ -83,23 +83,5 @@ task nuget-package -depends nuget-package-layout {
 	exec { & "${lib.build.dir}/NuGet/nuget.exe" pack "${src.dir}/nuget-package/package.nuspec" -BasePath "${build.dir}/nuget-package-layout" -OutputDirectory "${build.dir}/nuget-package" }
 }
 
-task test -depends build-cli, test-uses-vs-reporter-by-default, test-writes-report-file
-
-task test-uses-vs-reporter-by-default {
-	Remove-Module jshint -ErrorAction SilentlyContinue
-	Import-Module "${build.dir}/cli/jshint.psm1"
-	$actual = Invoke-JSHint -PathList "${src.dir}/test/broken.js"
-	$expected = "./src/test/broken.js(1,14): warning JSHint: Unmatched '{'."
-	Assert ($actual -eq $expected) "Expected: '$expected'`n`tbut got:  '$actual'"
-}
-
-task test-writes-report-file {	
-	Remove-Module jshint -ErrorAction SilentlyContinue
-	Import-Module "${build.dir}/cli/jshint.psm1"
-	${report.file} = "${build.dir}/report.txt"
-	Invoke-JSHint -PathList "${src.dir}/test/broken.js" -ReportFile ${report.file}
-	$actual = Get-Content -Path ${report.file}
-	Remove-Item -Path ${report.file} -ErrorAction SilentlyContinue
-	$expected = "./src/test/broken.js(1,14): warning JSHint: Unmatched '{'."
-	Assert ($actual -eq $expected) "Expected: '$expected'`n`tbut got:  '$actual'"	
-}
+include "./src/test/tests.ps1"
+task test -depends build-cli, run-tests
