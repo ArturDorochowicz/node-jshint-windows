@@ -9,7 +9,6 @@
 		<projectUrl>https://github.com/ArturDorochowicz/node-jshint-windows</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>Packaging of node command line interface for JSHint with Windows version of node.js, plus a PowerShell module to encapsulate that.</description>
-		<description>Packaging of node command line interface for JSHint with Windows version of node.js.</description>
 		<tags>jshint jslint lint node javascript</tags>
 	</metadata>
 	<files>
