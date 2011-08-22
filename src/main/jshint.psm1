@@ -7,12 +7,13 @@ function Invoke-JSHint {
 		[Parameter(Position=1)] [string] $ConfigFile,
 		[Parameter(Position=2)] [string] $ReportFile,
 		[string] $Reporter,
-		[switch] $JSLintReporter
+		[switch] $JSLintReporter,
+		[switch] $ShowNonErrors
 	)
 	$JSHint = "${PSScriptRoot}/jshint.bat"
 	$VSReporter = "${PSScriptRoot}/lib/vs_reporter.js"
 	# Use VS reporter by default.
-	$useVSReporter = (!$Reporter -and !$JSLintReporter)
+	$useVSReporter = (!$Reporter -and !$JSLintReporter -and !$ShowNonErrors)
 	
 	$arguments = @()
 	$arguments += $PathList
@@ -31,6 +32,10 @@ function Invoke-JSHint {
 	
 	if ($JSLintReporter) {
 		$arguments += '--jslint-reporter'
+	}
+	
+	if ($ShowNonErrors) {
+		$arguments += '--show-non-errors'
 	}
 	
 	Write-Verbose "Running JSHint: `n${JSHint} ${arguments}"
