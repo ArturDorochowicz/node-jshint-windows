@@ -42,9 +42,7 @@ task build-cli -depends clean-build-dir, prepare-build-dir, git-submodules-updat
 	Copy-Item -Recurse -Path "${src.dir}/main/*" -Destination "${build.dir}/cli"
 	Copy-Item -Include 'changelog.txt', 'license.txt', 'readme.txt' -Path "${sln.dir}/*" -Destination "${build.dir}/cli"
 	Copy-Item -Path $node -Destination "${build.dir}/cli/lib"
-	
-	New-Item -ItemType container -Path "${build.dir}/cli/lib/node_modules"
-	
+
 	New-Item -ItemType container -Path "${build.dir}/cli/lib/node_modules/argsparser"
 	Copy-Item -Include 'index.js', 'package.json' -Path "${lib.runtime.dir}/node-argsparser/*" -Destination "${build.dir}/cli/lib/node_modules/argsparser/"
 	New-Item -ItemType container -Path "${build.dir}/cli/lib/node_modules/argsparser/lib"
