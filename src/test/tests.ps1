@@ -58,7 +58,7 @@ function test-raises-error-when-errors-found {
 
 function test-uses-VS-reporter-by-default {
 	$actual = Invoke-JSHint -PathList "${src.dir}/test/broken.js" -ErrorAction SilentlyContinue
-	$expected = "./src/test/broken.js(1,14): warning JSHint: Unmatched '{'."
+	$expected = "./src/test/broken.js(1,14): error JSHint: Unmatched '{'."
 	Assert ($actual -eq $expected) "Expected: '${expected}'`n`tbut got:  '${actual}'"
 }
 
@@ -67,7 +67,7 @@ function test-writes-report-file {
 	try {
 		Invoke-JSHint -PathList "${src.dir}/test/broken.js" -ReportFile ${report.file} -ErrorAction SilentlyContinue
 		$actual = Get-Content -Path ${report.file}		
-		$expected = "./src/test/broken.js(1,14): warning JSHint: Unmatched '{'."
+		$expected = "./src/test/broken.js(1,14): error JSHint: Unmatched '{'."
 		Assert ($actual -eq $expected) "Expected: '${expected}'`n`tbut got:  '${actual}'"
 	} finally {
 		Remove-Item -Path ${report.file} -ErrorAction SilentlyContinue
@@ -77,6 +77,6 @@ function test-writes-report-file {
 function test-uses-config-file-when-specified {
 	${config.file} = "${src.dir}/test/config.json"
 	$actual = Invoke-JSHint -PathList ${test.testfile.js} -ConfigFile ${config.file} -ErrorAction SilentlyContinue
-	$expected = "./src/test/testfile.js(3,13): warning JSHint: 'window' is not defined."
+	$expected = "./src/test/testfile.js(3,13): error JSHint: 'window' is not defined."
 	Assert ($actual -eq $expected) "Expected: '${expected}'`n`tbut got:  '${actual}'"
 }
