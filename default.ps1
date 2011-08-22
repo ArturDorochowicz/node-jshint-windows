@@ -49,7 +49,7 @@ task build-cli -depends clean-build-dir, prepare-build-dir, git-submodules-updat
 	Copy-Item -Path "${lib.runtime.dir}/node-argsparser/lib/argsparser.js" -Destination "${build.dir}/cli/lib/node_modules/argsparser/lib/"
 
 	New-Item -ItemType container -Path "${build.dir}/cli/lib/node_modules/jshint"
-	Copy-Item -Recurse -Include 'lib', 'HELP', 'LICENSE', 'package.json' -Path "${lib.runtime.dir}/node-jshint/*" -Destination "${build.dir}/cli/lib/node_modules/jshint/"
+	Copy-Item -Recurse -Include 'lib', 'HELP', 'LICENSE', 'package.json', 'README.md' -Path "${lib.runtime.dir}/node-jshint/*" -Destination "${build.dir}/cli/lib/node_modules/jshint/"
 	New-Item -ItemType container -Path "${build.dir}/cli/lib/node_modules/jshint/packages/jshint"
 	Copy-Item -Path "${lib.runtime.dir}/node-jshint/packages/jshint/jshint.js" -Destination "${build.dir}/cli/lib/node_modules/jshint/packages/jshint/"
 }
