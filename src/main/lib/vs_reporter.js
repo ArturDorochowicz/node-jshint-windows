@@ -5,7 +5,7 @@
 module.exports = {
     reporter: function (results) {
         'use strict';
-        var format = '%s(%d,%d): warning JSHint: %s';
+        var format = '%s(%d,%d): error JSHint: %s';
 
         results.forEach(function (result) {
             var error = result.error;
