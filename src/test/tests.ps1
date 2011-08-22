@@ -76,7 +76,7 @@ function test-writes-report-file {
 
 function test-uses-config-file-when-specified {
 	${config.file} = "${src.dir}/test/config.json"
-	$actual = Invoke-JSHint -PathList ${test.testfile.js} -CustomConfigFile ${config.file} -ErrorAction SilentlyContinue
+	$actual = Invoke-JSHint -PathList ${test.testfile.js} -ConfigFile ${config.file} -ErrorAction SilentlyContinue
 	$expected = "./src/test/testfile.js(3,13): warning JSHint: 'window' is not defined."
 	Assert ($actual -eq $expected) "Expected: '${expected}'`n`tbut got:  '${actual}'"
 }

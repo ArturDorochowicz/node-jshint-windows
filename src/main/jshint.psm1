@@ -4,29 +4,29 @@ function Invoke-JSHint {
 	[CmdletBinding()]
 	param(
 		[Parameter(Mandatory=$true, Position=0)] [string[]] $PathList,
-		[Parameter(Position=1)] [string] $CustomConfigFile,
+		[Parameter(Position=1)] [string] $ConfigFile,
 		[Parameter(Position=2)] [string] $ReportFile,
-		[string] $CustomReporter,
+		[string] $Reporter,
 		[switch] $JSLintReporter
 	)
 	$JSHint = "${PSScriptRoot}/jshint.bat"
 	$VSReporter = "${PSScriptRoot}/lib/vs_reporter.js"
 	# Use VS reporter by default.
-	$useVSReporter = (!$CustomReporter -and !$JSLintReporter)
+	$useVSReporter = (!$Reporter -and !$JSLintReporter)
 	
 	$arguments = @()
 	$arguments += $PathList
 	
-	if ($CustomConfigFile) {
-		$arguments += @('--config', $CustomConfigFile)
+	if ($ConfigFile) {
+		$arguments += @('--config', $ConfigFile)
 	}
 
 	if ($useVSReporter) {
 		$arguments += @('--reporter', $VSReporter);
 	}
 	
-	if ($CustomReporter) {
-		$arguments += @('--reporter', $CustomReporter)
+	if ($Reporter) {
+		$arguments += @('--reporter', $Reporter)
 	}
 	
 	if ($JSLintReporter) {
