@@ -1,5 +1,5 @@
 properties {
-	${node.url} = 'http://nodejs.org/dist/v0.5.4/node.exe'
+	${node.url} = 'http://nodejs.org/dist/v0.5.7/node.exe'
 
 	${sln.dir} = '.'
 	${build.dir} = "${sln.dir}/build"
