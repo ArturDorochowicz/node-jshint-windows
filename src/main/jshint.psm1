@@ -46,10 +46,6 @@ function Invoke-JSHint {
 		(& ${JSHint} $arguments)
 	}
 	$jshintExitCode = $LASTEXITCODE	
-	if ($useVSReporter -and $ReportFileContent) {
-		Write-Verbose "VS Reporter was used. Failure detected by checking the existance of output."
-		$jshintExitCode = 1
-	}	
 	
 	if (${ReportFile}) {
 		Out-File -InputObject ${ReportFileContent} -FilePath ${ReportFile} -Encoding UTF8

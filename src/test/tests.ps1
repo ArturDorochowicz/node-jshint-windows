@@ -21,7 +21,7 @@ task run-tests {
 			%{
 				$test = $_
 				"Test: $test"
-				try {					
+				try {
 					& $test | Out-Null
 					"      OK"
 				} catch {

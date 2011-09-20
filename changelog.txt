@@ -2,7 +2,7 @@
 vNext
  - PowerShell module that encapsulates jshint.bat
  - MSBuild/Visual Studio-compatible reporter, used by default in PS module
- - node-jshint 0.3.0 (commit 0b99a0958dbf2d3f9406e626ffc6d62faea7e240)
+ - node-jshint 0.3.1 (commit 1c5fe7cff2db230493a614a80eb2ea160f02381b)
 
 0.2.3.2 
  - fix missing files from jshint (HELP, LICENSE)
