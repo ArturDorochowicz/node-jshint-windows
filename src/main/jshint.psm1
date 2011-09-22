@@ -6,14 +6,17 @@ function Invoke-JSHint {
 		[Parameter(Mandatory=$true, Position=0)] [string[]] $PathList,
 		[Parameter(Position=1)] [string] $ConfigFile,
 		[Parameter(Position=2)] [string] $ReportFile,
-		[string] $Reporter,
-		[switch] $JSLintReporter,
-		[switch] $ShowNonErrors
+		[string] [ValidateSet('Default', 'DefaultNonError', 'JSLint', 'VSReporter')] $ReporterType = 'VSReporter',
+		[string] $Reporter
 	)
+	
 	$JSHint = "${PSScriptRoot}/jshint.bat"
-	$VSReporter = "${PSScriptRoot}/lib/vs_reporter.js"
-	# Use VS reporter by default.
-	$useVSReporter = (!$Reporter -and !$JSLintReporter -and !$ShowNonErrors)
+	$Reporters = @{
+		'Default' = "${PSScriptRoot}/lib/node_modules/jshint/lib/reporters/default.js"
+		'DefaultNonError' = "${PSScriptRoot}/lib/node_modules/jshint/lib/reporters/non_error.js"
+		'JSLint' = "${PSScriptRoot}/lib/node_modules/jshint/lib/reporters/jslint_xml.js"
+		'VSReporter' = "${PSScriptRoot}/lib/vs_reporter.js"
+	}
 	
 	$arguments = @()
 	$arguments += $PathList
@@ -22,25 +25,17 @@ function Invoke-JSHint {
 		$arguments += @('--config', $ConfigFile)
 	}
 
-	if ($useVSReporter) {
-		$arguments += @('--reporter', $VSReporter);
-	}
-	
 	if ($Reporter) {
-		$arguments += @('--reporter', $Reporter)
+		$ReporterFile = $Reporter
+	} else {
+		$ReporterFile = $Reporters[$ReporterType] 
 	}
-	
-	if ($JSLintReporter) {
-		$arguments += '--jslint-reporter'
-	}
-	
-	if ($ShowNonErrors) {
-		$arguments += '--show-non-errors'
-	}
-	
+
+	$arguments += @('--reporter', $ReporterFile)
+
 	Write-Verbose "Running JSHint: `n${JSHint} ${arguments}"
 	
-	if ($ReportFile -or $useVSReporter) {
+	if ($ReportFile) {
 		(& ${JSHint} $arguments) | Tee-Object -Variable ReportFileContent
 	} else {
 		(& ${JSHint} $arguments)

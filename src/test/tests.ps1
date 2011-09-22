@@ -8,11 +8,13 @@ properties {
 		'test-raises-error-when-errors-found',
 		'test-uses-VS-reporter-by-default',
 		'test-writes-report-file',
-		'test-uses-config-file-when-specified')
+		'test-uses-config-file-when-specified',
+		'test-uses-default-reporter-when-specified',
+		'test-uses-jslint-reporter-when-specified')
 }
 
 task run-tests {	
-	$errors = @{}
+	$errors = 0
 		
 	try {
 		Remove-Module jshint -ErrorAction SilentlyContinue
@@ -26,18 +28,17 @@ task run-tests {
 					"      OK"
 				} catch {
 					"      Failed"
-					$errors[$test] = $_
+					Write-Host -ForegroundColor Red -Object $_
+					$errors = $errors + 1
 				}
 			}
 	} finally {
 		Remove-Module jshint -ErrorAction SilentlyContinue
 	}
-		
-	$errors.Keys | 
-		%{
-			$testFailure = $errors[$_]
-			Write-Error -Message "Test: $_ failed:`n$testFailure"
-		}
+    
+	if ($errors -gt 0) {
+		Write-Error -Message "Failed tests: $errors"
+	}
 }
 
 function test-no-error-when-no-errors-found {
@@ -79,4 +80,16 @@ function test-uses-config-file-when-specified {
 	$actual = Invoke-JSHint -PathList ${test.testfile.js} -ConfigFile ${config.file} -ErrorAction SilentlyContinue
 	$expected = "./src/test/testfile.js(3,13): error JSHint: 'window' is not defined."
 	Assert ($actual -eq $expected) "Expected: '${expected}'`n`tbut got:  '${actual}'"
+}
+
+function test-uses-default-reporter-when-specified {
+	$actual = Invoke-JSHint -PathList "${src.dir}/test/broken.js" -ReporterType Default -ErrorAction SilentlyContinue
+	$expected = "./src/test/broken.js: line 1, col 14, Unmatched '{'.  1 error"
+	Assert (($actual -join " ") -eq $expected) "Expected: '${expected}'`n`tbut got:  '${actual}'"
+}
+
+function test-uses-jslint-reporter-when-specified {
+	$actual = Invoke-JSHint -PathList "${src.dir}/test/broken.js" -ReporterType JSLint -ErrorAction SilentlyContinue
+	$expected = "<?xml version=""1.0"" encoding=""utf-8""?> <jslint> `t<file name=""src/test/broken.js""> `t`t<issue line=""1"" char=""14"" reason=""Unmatched &apos;{&apos;."" evidence=""function a() {"" /> `t</file> </jslint>"
+	Assert (($actual -join " ") -eq $expected) "Expected: '${expected}'`n`tbut got:  '${actual}'"
 }
