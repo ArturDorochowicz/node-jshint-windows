@@ -3,11 +3,11 @@ Remove-Module JSHint -ErrorAction SilentlyContinue
 function Invoke-JSHint {
 	[CmdletBinding()]
 	param(
-		[Parameter(Mandatory=$true, Position=0)] [string[]] $PathList,
-		[Parameter(Position=1)] [string] $ConfigFile,
-		[Parameter(Position=2)] [string] $ReportFile,
-		[string] [ValidateSet('Default', 'DefaultNonError', 'JSLint', 'VSReporter')] $ReporterType = 'VSReporter',
-		[string] $Reporter
+		[Parameter(Mandatory=$true, Position=0)] [ValidateNotNullOrEmpty()] [string[]] $PathList,
+		[Parameter(Position=1)] [ValidateNotNullOrEmpty()] [string] $ConfigFile,
+		[Parameter(Position=2)] [ValidateNotNullOrEmpty()] [string] $ReportFile,
+		[ValidateNotNullOrEmpty()] [ValidateSet('Default', 'DefaultNonError', 'JSLint', 'VSReporter')] [string] $ReporterType = 'VSReporter',
+		[ValidateNotNullOrEmpty()] [string] $Reporter
 	)
 	
 	$JSHint = "${PSScriptRoot}/jshint.bat"
