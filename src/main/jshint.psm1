@@ -1,6 +1,28 @@
 Remove-Module JSHint -ErrorAction SilentlyContinue
 
 function Invoke-JSHint {
+	<#
+		.SYNOPSIS
+			Invokes JSHint on specified paths.
+	
+		.DESCRIPTION
+			
+	
+		.PARAMETER  PathList
+			The list of files to check.
+	
+		.PARAMETER  ConfigFile
+			The JSHint .json configuration file.
+			
+		.PARAMETER  ReportFile
+			The output report file.
+			
+		.PARAMETER  ReporterType
+			The type of the standard reporter to use. One of: Default, DefaultNonError, JSLint, VSReporter. The default is VSReporter.
+	
+		.PARAMETER  Reporter
+			The custom reporter file to use. Overrides ReporterType.
+	#>	
 	[CmdletBinding()]
 	param(
 		[Parameter(Mandatory=$true, Position=0)] [ValidateNotNullOrEmpty()] [string[]] $PathList,
