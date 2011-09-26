@@ -9,7 +9,7 @@ properties {
 	${node} = "${lib.runtime.dir}/node/node.exe"
 }
 
-task default -depends clean, build-cli, nuget-package
+task default -depends clean, build-cli, test, nuget-package
 
 task initialize-dev -depends update-git-submodules, download-node 
 

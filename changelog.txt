@@ -1,5 +1,5 @@
 
-vNext
+0.3.1
  - MIT license
  - PowerShell module that encapsulates jshint.bat
  - MSBuild/Visual Studio-compatible reporter, used by default in PS module
