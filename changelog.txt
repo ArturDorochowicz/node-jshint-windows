@@ -1,4 +1,7 @@
 
+vNext
+ - node-jshint 0.4.0 (commit 4ed896ced1eb70e1dcf4688c0eb749a5a7931eb9)
+
 0.3.1
  - MIT license
  - PowerShell module that encapsulates jshint.bat
