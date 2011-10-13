@@ -1,6 +1,9 @@
 
 vNext
- - node-jshint 0.4.0 (commit 4ed896ced1eb70e1dcf4688c0eb749a5a7931eb9)
+ - node-jshint 0.5.0 (commit 4bdc29dfcf1b5024aacb66aef6f37611a5056c1b)
+ - minimatch 0.0.4 (commit 6e8c1c666a08a7d33bbc9c0d4027b213e628ab88)
+ - lru-cache 1.0.4 (commit 83b610b23368e0b5300e0760e84ce7c85bab5fd3)
+ - remove dummy glob module, node-jshint 0.5.0 uses minimatch; .jshintingore files now work
 
 0.3.1
  - MIT license

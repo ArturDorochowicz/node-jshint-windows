@@ -4,3 +4,6 @@
 [submodule "lib/runtime/node-argsparser"]
 	path = lib/runtime/node-argsparser
 	url = git://github.com/kof/node-argsparser.git
+[submodule "lib/runtime/minimatch"]
+	path = lib/runtime/minimatch
+	url = git://github.com/isaacs/minimatch
