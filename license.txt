@@ -27,5 +27,7 @@ DEALINGS IN THE SOFTWARE.
 In your use you must comply with licenses governing the included components as well: 
  - node-jshint      https://github.com/jshint/node-jshint
  - node-argsparser  https://github.com/kof/node-argsparser
+ - minimatch        https://github.com/isaacs/minimatch
+ - lru-cache        https://github.com/isaacs/node-lru-cache
  - JSHint           https://github.com/jshint/jshint
  - node.js          https://github.com/joyent/node

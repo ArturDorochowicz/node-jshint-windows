@@ -9,7 +9,6 @@ Ready to use on Windows (and Windows alone).
 1. Command line interface via jshint.bat
 
 For details look at node-jshint readme file in lib\node_modules\jshint directory. 
-Please note that .jshintignore files are ignored due to unavailability of glob module on Windows.
 
 
 2. PowerShell jshint.psm1 module
