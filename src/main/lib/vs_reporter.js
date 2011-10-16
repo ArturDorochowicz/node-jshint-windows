@@ -10,10 +10,6 @@ module.exports = {
             str += result.file + '(' + error.line + ',' + error.character + '): error JSHint: ' + error.reason + '\n';
         });
 
-        process.stdout.on('end', function () {
-            process.exit(results.length > 0 ? 1 : 0);
-        });
-
         process.stdout.write(str + "\n");
     }
 };

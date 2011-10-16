@@ -1,4 +1,7 @@
 
+vNext
+ - node-jshint 0.5.1 (commit 9db9c53492f62b550320d88f601e641fadc7abbb)
+
 0.5.0
  - node-jshint 0.5.0 (commit 4bdc29dfcf1b5024aacb66aef6f37611a5056c1b)
  - minimatch 0.0.4 (commit 6e8c1c666a08a7d33bbc9c0d4027b213e628ab88)
