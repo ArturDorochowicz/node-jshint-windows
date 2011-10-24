@@ -1,4 +1,7 @@
 
+vNext
+ - node.js 0.5.10 (unstable)
+
 0.5.1
  - node-jshint 0.5.1 (commit 9db9c53492f62b550320d88f601e641fadc7abbb)
 
