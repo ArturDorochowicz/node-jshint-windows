@@ -1,5 +1,5 @@
 
-vNext
+0.5.2
  - node-jshint 0.5.2 (commit 74922b4bd8a320ad87e6b368249d03a70c50f625)
 
 0.5.1
