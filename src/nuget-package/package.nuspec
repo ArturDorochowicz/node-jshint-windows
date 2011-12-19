@@ -3,7 +3,7 @@
 	<metadata>
 		<id>node-jshint</id>
 		<version>0.5.2</version>
-		<authors>Artur Dorochowicz</authors>
+		<authors>Brent Lintner</authors>
 		<owners>Artur Dorochowicz</owners>
 		<licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
 		<projectUrl>https://github.com/ArturDorochowicz/node-jshint-windows</projectUrl>
