@@ -60,9 +60,10 @@ task build-cli -depends prepare-build-dir {
 	Copy-Item -Path "${lib.runtime.dir}/node-jshint/packages/jshint/jshint.js" -Destination "${build.dir}/cli/lib/node_modules/jshint/packages/jshint/"
 	
 	New-Item -ItemType container -Path "${build.dir}/cli/lib/node_modules/minimatch"
-	Copy-Item -Recurse -Include 'LICENSE', 'minimatch.js', 'package.json', 'README.md' -Path "${lib.runtime.dir}/minimatch/*" -Destination "${build.dir}/cli/lib/node_modules/minimatch/"	
+	Copy-Item -Recurse -Include 'LICENSE', 'minimatch.js', 'package.json', 'README.md' -Path "${lib.runtime.dir}/minimatch/*" -Destination "${build.dir}/cli/lib/node_modules/minimatch/"
+	
 	New-Item -ItemType container -Path "${build.dir}/cli/lib/node_modules/lru-cache"
-	Copy-Item -Recurse -Include 'lib', 'LICENSE', 'package.json', 'README.md' -Path "${lib.runtime.dir}/minimatch/node_modules/lru-cache/*" -Destination "${build.dir}/cli/lib/node_modules/lru-cache/"
+	Copy-Item -Recurse -Include 'lib', 'LICENSE', 'package.json', 'README.md' -Path "${lib.runtime.dir}/node-lru-cache/*" -Destination "${build.dir}/cli/lib/node_modules/lru-cache/"
 }
 
 task nuget-package-layout -depends build-cli {

@@ -7,3 +7,6 @@
 [submodule "lib/runtime/minimatch"]
 	path = lib/runtime/minimatch
 	url = git://github.com/isaacs/minimatch
+[submodule "lib/runtime/node-lru-cache"]
+	path = lib/runtime/node-lru-cache
+	url = git://github.com/isaacs/node-lru-cache
