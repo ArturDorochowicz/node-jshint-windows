@@ -1,5 +1,5 @@
 
-vNext
+0.5.5
  - node-jshint 0.5.5 (commit 99b66f067c95b8d2f83a5789d1498e2a1426aa3d)
  - minimatch 0.0.5 (commit 74930846c80bbc0413a7aa1d2718248831cbdc27)
  - node-lru-cache 1.0.5 (commit 23b2079060c3ca17f85968174da5ee0bf636fa8a)
